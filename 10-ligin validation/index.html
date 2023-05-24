@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f2f2f2;
+      border: 1px solid #ccc;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .error-message {
+      color: red;
+      font-size: 12px;
+      margin-top: 5px;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Login</h1>
+    <form id="loginForm" onsubmit="return validateForm()">
+      <div class="form-group">
+        <label for="username">User Name:</label>
+        <input type="text" id="username" required>
+        <span id="usernameError" class="error-message"></span>
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" required>
+        <span id="passwordError" class="error-message"></span>
+      </div>
+      <button type="submit" class="btn">Login</button>
+    </form>
+  </div>
+
+  <script>
+    function validateForm() {
+      var username = document.getElementById('username').value;
+      var password = document.getElementById('password').value;
+
+      // Validate Username
+      var usernamePattern = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&+*!=]).{8,}$/;
+      if (!usernamePattern.test(username)) {
+        document.getElementById('usernameError').textContent = "Username should contain at least one uppercase letter, one lowercase letter, one special character, one number, and be at least 8 characters long.";
+        return false;
+      }
+
+      // Validate Password
+      var passwordPattern = /^(?=.*[A-Z])(?=.*[@#$%^&+*!=]).{8,}$/;
+      if (!passwordPattern.test(password)) {
+        document.getElementById('passwordError').textContent = "Password should contain at least one uppercase letter, one special character, and be at least 8 characters long.";
+        return false;
+      }
+
+      // All validations passed
+      return true;
+    }
+  </script>
+</body>
+</html>
